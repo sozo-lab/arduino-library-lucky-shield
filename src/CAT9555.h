@@ -38,13 +38,16 @@ Arduino_CAT9555.h
 #define	JOYD		(uint8_t)0X02	//reg1
 #define	JOYC		(uint8_t)0X10	//reg1
 #define	OLEDR		(uint8_t)0x80	//reg1
+#define	PB_1		(uint8_t)0X10	//reg1
+#define	PB_2		(uint8_t)0x80	//reg1
+
 
 ////////////////////////////////
 // CAT9555 Class Declaration  //
 ////////////////////////////////
 class CAT9555
 {
-public:	
+public:
 	CAT9555(uint8_t addr = ADDRESS);
 	void begin();
 	int digitalRead(int pin);
