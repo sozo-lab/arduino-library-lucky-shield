@@ -17,7 +17,7 @@ by  andrea@arduino.org,
 
 
 //set the sea level pressure
-#define SEALEVELPRESSURE_HPA 1008 
+#define SEALEVELPRESSURE_HPA 1008
 
 void setup() {
 
@@ -35,7 +35,7 @@ void loop() {
   lucky.oled().clearDisplay();
   lucky.oled().print("Arduino");
   lucky.oled().display();
-  
+
   //write gpio
   lucky.gpio().digitalWrite(LED1,HIGH);
   lucky.gpio().digitalWrite(REL1,HIGH);
@@ -65,9 +65,9 @@ void loop() {
   Serial.print(lucky.gpio().digitalRead(JOYL));
   Serial.print("  joy-U: ");
   Serial.print(lucky.gpio().digitalRead(JOYU));
-  Serial.print("  joy-C: "); 
+  Serial.print("  joy-C: ");
   Serial.println(lucky.gpio().digitalRead(JOYC));
-  
+
   //read accelerometer sensor
   lucky.accelerometer().read();
   Serial.print("x: ");
@@ -84,7 +84,7 @@ void loop() {
   Serial.print(lucky.magnetometer().y());
   Serial.print("  Mz: ");
   Serial.println(lucky.magnetometer().z());
-  
+
 
   //read environment sensor
   Serial.print("Temperature = ");
