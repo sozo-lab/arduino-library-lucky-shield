@@ -1,5 +1,28 @@
-/******************************************************************************
-Arduino_CAT9555.cpp
+/*
+****************************************************************************
+* Copyright (c) 2015 Arduino srl. All right reserved.
+*
+* File : CAT9555.cpp
+* Date : 2016/03/21
+* Revision : 0.0.1 $
+* Author: andrea[at]arduino[dot]org
+*
+****************************************************************************
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
 ******************************************************************************/
 
 #include <CAT9555.h>
@@ -65,7 +88,7 @@ uint8_t CAT9555::read_8_Register(int reg)
 	Wire.beginTransmission(address);
 	Wire.write(reg);
 	Wire.endTransmission();  
-	Wire.requestFrom(address, (uint8_t)1); 
+	Wire.requestFrom(address, (byte)1); 
 	if(Wire.available()) {
 		_data0 = Wire.read();
 	}
@@ -78,7 +101,7 @@ uint16_t CAT9555::read_16_Register(int reg)
 	Wire.beginTransmission(address);
 	Wire.write(reg);
 	Wire.endTransmission();  
-	Wire.requestFrom(address, (uint8_t)2); 
+	Wire.requestFrom(address, (byte)2); 
 	if(Wire.available()) {
 		_data0 = Wire.read() << 8 ;
 	}
