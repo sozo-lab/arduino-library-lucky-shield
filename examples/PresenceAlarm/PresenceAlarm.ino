@@ -6,7 +6,7 @@ detected by the PIR
 
 The buzzer is directly connected on the digital pin 5
 
-The following pin are defined in the Lucky Shield library and directly map the digitals
+The following pins are defined in the Lucky Shield library, they directly map the digitals
 of the Lucky Shield
 
 LED1: on board first LED
@@ -23,8 +23,8 @@ JOYC: on board Joystick - central pressed
 
 PIR: on board (Passive Infrared Sensor) Presence Sensor
 
-PB_1: on board first Push Button
-PB_2: on board second Push Button
+PB1: on board first Push Button
+PB2: on board second Push Button
 
 created Mar 2016
 by  andrea@arduino.org,
