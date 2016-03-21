@@ -34,8 +34,8 @@ by  andrea@arduino.org,
 #include <Wire.h>
 
 void setup() {
-  lucky.init();
-  lucky.gpio().begin();
+  lucky.begin();
+
 }
 
 void loop() {
