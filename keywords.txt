@@ -13,11 +13,10 @@ lucky	KEYWORD3
 #######################################
 
 accelerometer	KEYWORD2
-bosch	KEYWORD2
+environment	KEYWORD2
 oled	KEYWORD2
 magnetometer	KEYWORD2
 gpio	KEYWORD2
-init	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -33,7 +32,5 @@ JOYL	LITERAL1
 JOYU	LITERAL1
 JOYC	LITERAL1
 PIR	LITERAL1
-PB_1	LITERAL1
-PB_2	LITERAL1
-os1x	LITERAL1
-smForced	LITERAL1
+PB1	LITERAL1
+PB2	LITERAL1
