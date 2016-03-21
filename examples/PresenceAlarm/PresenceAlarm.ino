@@ -40,8 +40,7 @@ by  andrea@arduino.org,
 
 void setup() {
 
-  lucky.init();
-  lucky.gpio().begin();
+  lucky.begin();
 
 }
 

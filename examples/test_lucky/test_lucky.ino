@@ -1,17 +1,34 @@
+/*
+test_lucky
+
+A simple Arduino sketch that reads data from the on-board sensors of the Lucky Shield and checks all gpios.
+It prints sensors data via the Serial Monitor.
+
+The following pin are defined in the Lucky Shield library and directly map the digitals
+of the Lucky Shield.
+
+created Mar 2016
+by  andrea@arduino.org,
+    sergio@arduino.org
+*/
+
 #include <Lucky.h>
 #include <Wire.h>
 
+
+//set the sea level pressure
+#define SEALEVELPRESSURE_HPA 1008 
+
 void setup() {
 
-  lucky.init();
-  lucky.gpio().begin();
-  lucky.magnetometer().begin();
-  lucky.oled().begin();
+  lucky.begin();
   Serial.begin(9600);
   while(!Serial);
 }
 
 void loop() {
+
+  //print on the oled
   lucky.oled().setTextSize(2);
   lucky.oled().setTextColor(WHITE);
   lucky.oled().setCursor(3,23);
@@ -19,14 +36,19 @@ void loop() {
   lucky.oled().print("Arduino");
   lucky.oled().display();
   
-  lucky.gpio().digitalWrite(LED2,LOW);
+  //write gpio
+  lucky.gpio().digitalWrite(LED1,HIGH);
   lucky.gpio().digitalWrite(REL1,HIGH);
+  lucky.gpio().digitalWrite(LED2,LOW);
   lucky.gpio().digitalWrite(REL2,LOW);
   delay(1000);
   lucky.gpio().digitalWrite(LED2,HIGH);
   lucky.gpio().digitalWrite(REL2,HIGH);
+  lucky.gpio().digitalWrite(LED1,LOW);
   lucky.gpio().digitalWrite(REL1,LOW);
   delay(1000);
+
+  //read gpios value
   Serial.print("LED1: ");
   Serial.print(lucky.gpio().digitalRead(LED1));
   Serial.print(" LED2: ");
@@ -45,43 +67,43 @@ void loop() {
   Serial.print(lucky.gpio().digitalRead(JOYU));
   Serial.print("  joy-C: "); 
   Serial.println(lucky.gpio().digitalRead(JOYC));
+  
+  //read accelerometer sensor
   lucky.accelerometer().read();
   Serial.print("x: ");
-  Serial.print(lucky.accelerometer().x);
+  Serial.print(lucky.accelerometer().x());
   Serial.print("  y: ");
-  Serial.print(lucky.accelerometer().y);
+  Serial.print(lucky.accelerometer().y());
   Serial.print("  z: ");
-  Serial.println(lucky.accelerometer().z);
+  Serial.println(lucky.accelerometer().z());
+
+  //read magnetometer sensor
   Serial.print("Mx: ");
-  Serial.print(lucky.magnetometer().readx());
+  Serial.print(lucky.magnetometer().x());
   Serial.print("  My: ");
-  Serial.print(lucky.magnetometer().ready());
+  Serial.print(lucky.magnetometer().y());
   Serial.print("  Mz: ");
-  Serial.println(lucky.magnetometer().readz());
+  Serial.println(lucky.magnetometer().z());
   
-  lucky.bosch().readCompensationParams();
-  
-  // Need to turn on 1x oversampling, default is os_skipped, which means it doesn't measure anything
-  lucky.bosch().writeOversamplingPressure(os1x);  // 1x over sampling (ie, just one sample)
-  lucky.bosch().writeOversamplingTemperature(os1x);
-  lucky.bosch().writeOversamplingHumidity(os1x);
-  lucky.bosch().writeMode(smForced);
-  while (lucky.bosch().isMeasuring()) {
-    //Serial.println("Measuring...");
-    delay(50);
-  }
-  
-  // read out the data - must do this before calling the getxxxxx routines
-  lucky.bosch().readMeasurements();
-  Serial.print("Temp=");
-  Serial.print(lucky.bosch().getTemperature());  // must get temp first
-  Serial.print("  Humidity=");
-  Serial.print(lucky.bosch().getHumidity());
-  Serial.print("  Pressure=");
-  Serial.println(lucky.bosch().getPressure());
-  
+
+  //read environment sensor
+  Serial.print("Temperature = ");
+  Serial.print(lucky.environment().temperature());
+  Serial.println(" *C");
+  Serial.print("Pressure = ");
+  Serial.print(lucky.environment().pressure() / 100.0F);
+  Serial.println(" hPa");
+  Serial.print("Approx. Altitude = ");
+  Serial.print(lucky.environment().altitude(SEALEVELPRESSURE_HPA));
+  Serial.println(" m");
+  Serial.print("Humidity = ");
+  Serial.print(lucky.environment().humidity());
+  Serial.println(" %");
+
+  //clear oled
   lucky.oled().clearDisplay();
   lucky.oled().display();
+
   delay(1000);
 
 }

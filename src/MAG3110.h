@@ -3,6 +3,11 @@ mag3110.h
 libary for using the I2C mag3110 magnetometer
 
 (c) Written by Jeroen Cappaert for NanoSatisfi, August 2012
+
+ - 21 Mar. 2016
+ Library modified to work with Arduino Lucky Shield
+ by andrea[at]arduino[dot]org
+
 */
 
 #ifndef MAG3110_h
@@ -24,6 +29,10 @@ class MAG3110
     int readx();
     int ready();
     int readz();
+	
+	int x(){return readx();};
+	int y(){return ready();};
+	int z(){return readz();};
   private:
 };
 

@@ -1,5 +1,29 @@
-/******************************************************************************
-MMA8491Q.h
+/*
+****************************************************************************
+* This file is part of Arduino Lucky Shield Library
+*
+* Copyright (c) 2016 Arduino srl. All right reserved.
+*
+* File : MMA8491Q.h
+* Date : 2016/03/21
+* Revision : 0.0.1 $
+* Author: andrea[at]arduino[dot]org
+*
+****************************************************************************
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 ******************************************************************************/
 
@@ -26,18 +50,20 @@ class MMA8491Q
 public:	
 	MMA8491Q(uint8_t addr = ADDRESS);
 	void read();
-	float x;
-	float y;
-	float z;
+	float x(){return x_;};
+	float y(){return y_;};
+	float z(){return z_;};
 
 private:
 	byte address;
 	uint8_t data_read;
-	//void writeRegister(uint8_t reg, int data);
 	void readRegister(int reg);
 	float value(int val);
 	void enable();
 	void disable();
+	float x_;
+	float y_;
+	float z_;
 	uint16_t cx;
 	uint16_t cy;
 	uint16_t cz;

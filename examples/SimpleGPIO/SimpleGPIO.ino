@@ -22,8 +22,8 @@ JOYC: on board Joystick - central pressed
 
 PIR: on board (Passive Infrared Sensor) Presence Sensor
 
-PB_1: on board first Push Button
-PB_2: on board second Push Button
+PB1: on board first Push Button
+PB2: on board second Push Button
 
 created Mar 2016
 by  andrea@arduino.org,
@@ -34,8 +34,8 @@ by  andrea@arduino.org,
 #include <Wire.h>
 
 void setup() {
-  lucky.init();
-  lucky.gpio().begin();
+  lucky.begin();
+
 }
 
 void loop() {

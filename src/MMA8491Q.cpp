@@ -1,5 +1,30 @@
-/******************************************************************************
-MMA8491Q.cpp
+/*
+****************************************************************************
+* This file is part of Arduino Lucky Shield Library
+*
+* Copyright (c) 2016 Arduino srl. All right reserved.
+*
+* File : MMA8491Q.cpp
+* Date : 2016/03/21
+* Revision : 0.0.1 $
+* Author: andrea[at]arduino[dot]org
+*
+****************************************************************************
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
 ******************************************************************************/
 
 #include <MMA8491Q.h>
@@ -20,7 +45,7 @@ void MMA8491Q::enable(){
 	Wire.beginTransmission(GPIO_ADDRESS); //read the gpio expander value
 	Wire.write(GPIO_READ);
 	Wire.endTransmission();  
-	Wire.requestFrom(GPIO_ADDRESS,(uint8_t)1); 
+	Wire.requestFrom(GPIO_ADDRESS,(byte)1); 
 	if(Wire.available()) {
 		data_read = Wire.read();
 	}
@@ -56,14 +81,14 @@ void MMA8491Q::readRegister(int reg)
 	Wire.beginTransmission(address);
 	Wire.write(reg);
 	Wire.endTransmission();  
-	Wire.requestFrom(address, (uint8_t)7); 
+	Wire.requestFrom(address, (byte)7); 
 	state = Wire.read();
 	cx = Wire.read(); cx <<= 8; cx |= Wire.read(); cx >>= 2;
 	cy = Wire.read(); cy <<= 8; cy |= Wire.read(); cy >>= 2;
 	cz = Wire.read(); cz <<= 8; cz |= Wire.read(); cz >>= 2;
-	x = value(cx);
-	y = value(cy);
-	z = value(cz);
+	x_ = value(cx);
+	y_ = value(cy);
+	z_ = value(cz);
 	disable();
 
 }

@@ -14,6 +14,10 @@ products from Adafruit!
 Written by Limor Fried/Ladyada  for Adafruit Industries.  
 BSD license, check license.txt for more information
 All text above, and the splash screen must be included in any redistribution
+
+ - 21 Mar. 2016
+ Library modified to work with Arduino Lucky Shield
+ by andrea[at]arduino[dot]org
 *********************************************************************/
 
 #if ARDUINO >= 100
