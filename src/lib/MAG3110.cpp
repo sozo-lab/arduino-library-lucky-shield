@@ -14,6 +14,10 @@ libary for using the I2C mag3110 magnetometer
 #include "MAG3110.h"
 #include <Wire.h>
 
+#ifdef __SAM3X8E__
+#define Wire Wire1
+#endif
+
 //Constructor
 MAG3110::MAG3110()
 {
