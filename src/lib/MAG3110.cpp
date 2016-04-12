@@ -73,8 +73,12 @@ int MAG3110::read16Data(byte MSB, byte LSB)
     xl = Wire.read(); // receive the byte
   }
   
-  //int out = (xl|(xh << 8)); 
-  return (xl|(xh << 8)); //concatenate the MSB and LSB
+  int out = (xl|(xh << 8)); //concatenate the MSB and LSB 
+  if (out & 0b1000000000000000){
+     //float yout1 = ((~yout & 0b0111111111111111)+ 1)*(-1) ; 
+    return float ((~out & 0b0111111111111111)+ 1)*(-1) ;
+  }
+  return float (out);
 }
 
 
