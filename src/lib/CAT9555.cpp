@@ -24,8 +24,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 ******************************************************************************/
-
 #include "CAT9555.h"
+
 #include <Wire.h>
 
 #ifdef __SAM3X8E__

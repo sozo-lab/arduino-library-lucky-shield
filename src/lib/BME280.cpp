@@ -14,9 +14,10 @@
   Written by Limor Fried & Kevin Townsend for Adafruit Industries.
   BSD license, all text above must be included in any redistribution
  ***************************************************************************/
-#include "Arduino.h"
-#include <Wire.h>
 #include "BME280.h"
+
+#include <Arduino.h>
+#include <Wire.h>
 
 #ifdef __SAM3X8E__
 #define Wire Wire1
