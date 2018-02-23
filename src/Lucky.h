@@ -59,8 +59,8 @@
 #ifndef Lucky_h
 #define Lucky_h
 
-#include "lib/CAT9555.h"
 #include "lib/BME280.h"
+#include "lib/CAT9555.h"
 #include <Arduino.h>
 #include "Wire.h"
 
@@ -70,19 +70,20 @@
 
 class Lucky
 {
-	public:
-		
-		void begin(){ 
-			Wire.begin();
-			cat9555.begin();
-  			bme280.begin();
-		}	
-		BME280& environment(){
-		 	return bme280;
-		}
-		CAT9555& gpio(){
-		 	return cat9555;
-		}
+public:
+  void begin() {
+    Wire.begin();
+    cat9555.begin();
+    bme280.begin();
+  }
+
+  BME280& environment() {
+    return bme280;
+  }
+
+  CAT9555& gpio() {
+    return cat9555;
+  }
 };
 
 extern Lucky lucky;

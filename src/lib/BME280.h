@@ -107,32 +107,29 @@
 
 class BME280
 {
-  public:
+public:
+  bool  begin(uint8_t addr = BME280_ADDRESS);
+  float temperature(void);
+  float pressure(void);
+  float humidity(void);
+  float altitude(float seaLevel);
 
-    bool  begin(uint8_t addr = BME280_ADDRESS);
-    float temperature(void);
-    float pressure(void);
-    float humidity(void);
-    float altitude(float seaLevel);
+private:
+  void readCoefficients(void);
 
-  private:
+  void      write8(byte reg, byte value);
+  uint8_t   read8(byte reg);
+  uint16_t  read16(byte reg);
+  uint32_t  read24(byte reg);
+  int16_t   readS16(byte reg);
+  uint16_t  read16_LE(byte reg); // little endian
+  int16_t   readS16_LE(byte reg); // little endian
 
-    void readCoefficients(void);
+  uint8_t   _i2caddr;
+  int32_t   _sensorID;
+  int32_t t_fine;
 
-    void      write8(byte reg, byte value);
-    uint8_t   read8(byte reg);
-    uint16_t  read16(byte reg);
-    uint32_t  read24(byte reg);
-    int16_t   readS16(byte reg);
-    uint16_t  read16_LE(byte reg); // little endian
-    int16_t   readS16_LE(byte reg); // little endian
-
-    uint8_t   _i2caddr;
-    int32_t   _sensorID;
-    int32_t t_fine;
-
-    bme280_calib_data _bme280_calib;
-
+  bme280_calib_data _bme280_calib;
 };
 
 extern BME280 bme280;

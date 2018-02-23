@@ -26,7 +26,6 @@
  PRIVATE FUNCTIONS
  ***************************************************************************/
 
-
 bool BME280::begin(uint8_t a) {
   _i2caddr = a;
 
@@ -36,7 +35,7 @@ bool BME280::begin(uint8_t a) {
   readCoefficients();
 
   //Set before CONTROL_meas (DS 5.4.3)
-  write8(BME280_REGISTER_CONTROLHUMID, 0x05); //16x oversampling 
+  write8(BME280_REGISTER_CONTROLHUMID, 0x05); //16x oversampling
 
   write8(BME280_REGISTER_CONTROL, 0xB7); // 16x ovesampling, normal mode
   return true;
@@ -50,10 +49,10 @@ bool BME280::begin(uint8_t a) {
 /**************************************************************************/
 void BME280::write8(byte reg, byte value)
 {
-    Wire.beginTransmission((uint8_t)_i2caddr);
-    Wire.write((uint8_t)reg);
-    Wire.write((uint8_t)value);
-    Wire.endTransmission();
+  Wire.beginTransmission((uint8_t)_i2caddr);
+  Wire.write((uint8_t)reg);
+  Wire.write((uint8_t)value);
+  Wire.endTransmission();
 }
 
 /**************************************************************************/
@@ -82,11 +81,11 @@ uint16_t BME280::read16(byte reg)
 {
   uint16_t value;
 
-    Wire.beginTransmission((uint8_t)_i2caddr);
-    Wire.write((uint8_t)reg);
-    Wire.endTransmission();
-    Wire.requestFrom((uint8_t)_i2caddr, (byte)2);
-    value = (Wire.read() << 8) | Wire.read();
+  Wire.beginTransmission((uint8_t)_i2caddr);
+  Wire.write((uint8_t)reg);
+  Wire.endTransmission();
+  Wire.requestFrom((uint8_t)_i2caddr, (byte)2);
+  value = (Wire.read() << 8) | Wire.read();
 
   return value;
 }
@@ -94,12 +93,11 @@ uint16_t BME280::read16(byte reg)
 uint16_t BME280::read16_LE(byte reg) {
   uint16_t temp = read16(reg);
   return (temp >> 8) | (temp << 8);
-
 }
 
 /**************************************************************************/
 /*!
-    @brief  Reads a signed 16 bit value over I2C
+  @brief  Reads a signed 16 bit value over I2C
 */
 /**************************************************************************/
 int16_t BME280::readS16(byte reg)
@@ -111,13 +109,12 @@ int16_t BME280::readS16(byte reg)
 int16_t BME280::readS16_LE(byte reg)
 {
   return (int16_t)read16_LE(reg);
-
 }
 
 
 /**************************************************************************/
 /*!
-    @brief  Reads a 24 bit value over I2C
+  @brief  Reads a 24 bit value over I2C
 */
 /**************************************************************************/
 
@@ -125,16 +122,16 @@ uint32_t BME280::read24(byte reg)
 {
   uint32_t value;
 
-    Wire.beginTransmission((uint8_t)_i2caddr);
-    Wire.write((uint8_t)reg);
-    Wire.endTransmission();
-    Wire.requestFrom((uint8_t)_i2caddr, (byte)3);
-    
-    value = Wire.read();
-    value <<= 8;
-    value |= Wire.read();
-    value <<= 8;
-    value |= Wire.read();
+  Wire.beginTransmission((uint8_t)_i2caddr);
+  Wire.write((uint8_t)reg);
+  Wire.endTransmission();
+  Wire.requestFrom((uint8_t)_i2caddr, (byte)3);
+
+  value = Wire.read();
+  value <<= 8;
+  value |= Wire.read();
+  value <<= 8;
+  value |= Wire.read();
 
   return value;
 }
@@ -142,31 +139,31 @@ uint32_t BME280::read24(byte reg)
 
 /**************************************************************************/
 /*!
-    @brief  Reads the factory-set coefficients
+  @brief  Reads the factory-set coefficients
 */
 /**************************************************************************/
 void BME280::readCoefficients(void)
 {
-    _bme280_calib.dig_T1 = read16_LE(BME280_REGISTER_DIG_T1);
-    _bme280_calib.dig_T2 = readS16_LE(BME280_REGISTER_DIG_T2);
-    _bme280_calib.dig_T3 = readS16_LE(BME280_REGISTER_DIG_T3);
+  _bme280_calib.dig_T1 = read16_LE(BME280_REGISTER_DIG_T1);
+  _bme280_calib.dig_T2 = readS16_LE(BME280_REGISTER_DIG_T2);
+  _bme280_calib.dig_T3 = readS16_LE(BME280_REGISTER_DIG_T3);
 
-    _bme280_calib.dig_P1 = read16_LE(BME280_REGISTER_DIG_P1);
-    _bme280_calib.dig_P2 = readS16_LE(BME280_REGISTER_DIG_P2);
-    _bme280_calib.dig_P3 = readS16_LE(BME280_REGISTER_DIG_P3);
-    _bme280_calib.dig_P4 = readS16_LE(BME280_REGISTER_DIG_P4);
-    _bme280_calib.dig_P5 = readS16_LE(BME280_REGISTER_DIG_P5);
-    _bme280_calib.dig_P6 = readS16_LE(BME280_REGISTER_DIG_P6);
-    _bme280_calib.dig_P7 = readS16_LE(BME280_REGISTER_DIG_P7);
-    _bme280_calib.dig_P8 = readS16_LE(BME280_REGISTER_DIG_P8);
-    _bme280_calib.dig_P9 = readS16_LE(BME280_REGISTER_DIG_P9);
+  _bme280_calib.dig_P1 = read16_LE(BME280_REGISTER_DIG_P1);
+  _bme280_calib.dig_P2 = readS16_LE(BME280_REGISTER_DIG_P2);
+  _bme280_calib.dig_P3 = readS16_LE(BME280_REGISTER_DIG_P3);
+  _bme280_calib.dig_P4 = readS16_LE(BME280_REGISTER_DIG_P4);
+  _bme280_calib.dig_P5 = readS16_LE(BME280_REGISTER_DIG_P5);
+  _bme280_calib.dig_P6 = readS16_LE(BME280_REGISTER_DIG_P6);
+  _bme280_calib.dig_P7 = readS16_LE(BME280_REGISTER_DIG_P7);
+  _bme280_calib.dig_P8 = readS16_LE(BME280_REGISTER_DIG_P8);
+  _bme280_calib.dig_P9 = readS16_LE(BME280_REGISTER_DIG_P9);
 
-    _bme280_calib.dig_H1 = read8(BME280_REGISTER_DIG_H1);
-    _bme280_calib.dig_H2 = readS16_LE(BME280_REGISTER_DIG_H2);
-    _bme280_calib.dig_H3 = read8(BME280_REGISTER_DIG_H3);
-    _bme280_calib.dig_H4 = (read8(BME280_REGISTER_DIG_H4) << 4) | (read8(BME280_REGISTER_DIG_H4+1) & 0xF);
-    _bme280_calib.dig_H5 = (read8(BME280_REGISTER_DIG_H5+1) << 4) | (read8(BME280_REGISTER_DIG_H5) >> 4);
-    _bme280_calib.dig_H6 = (int8_t)read8(BME280_REGISTER_DIG_H6);
+  _bme280_calib.dig_H1 = read8(BME280_REGISTER_DIG_H1);
+  _bme280_calib.dig_H2 = readS16_LE(BME280_REGISTER_DIG_H2);
+  _bme280_calib.dig_H3 = read8(BME280_REGISTER_DIG_H3);
+  _bme280_calib.dig_H4 = (read8(BME280_REGISTER_DIG_H4) << 4) | (read8(BME280_REGISTER_DIG_H4+1) & 0xF);
+  _bme280_calib.dig_H5 = (read8(BME280_REGISTER_DIG_H5+1) << 4) | (read8(BME280_REGISTER_DIG_H5) >> 4);
+  _bme280_calib.dig_H6 = (int8_t)read8(BME280_REGISTER_DIG_H6);
 }
 
 /**************************************************************************/
@@ -182,11 +179,11 @@ float BME280::temperature(void)
   adc_T >>= 4;
 
   var1  = ((((adc_T>>3) - ((int32_t)_bme280_calib.dig_T1 <<1))) *
-	   ((int32_t)_bme280_calib.dig_T2)) >> 11;
+          ((int32_t)_bme280_calib.dig_T2)) >> 11;
 
   var2  = (((((adc_T>>4) - ((int32_t)_bme280_calib.dig_T1)) *
-	     ((adc_T>>4) - ((int32_t)_bme280_calib.dig_T1))) >> 12) *
-	   ((int32_t)_bme280_calib.dig_T3)) >> 14;
+          ((adc_T>>4) - ((int32_t)_bme280_calib.dig_T1))) >> 12) *
+          ((int32_t)_bme280_calib.dig_T3)) >> 14;
 
   t_fine = var1 + var2;
 
@@ -212,12 +209,11 @@ float BME280::pressure(void) {
   var2 = var2 + ((var1*(int64_t)_bme280_calib.dig_P5)<<17);
   var2 = var2 + (((int64_t)_bme280_calib.dig_P4)<<35);
   var1 = ((var1 * var1 * (int64_t)_bme280_calib.dig_P3)>>8) +
-    ((var1 * (int64_t)_bme280_calib.dig_P2)<<12);
+         ((var1 * (int64_t)_bme280_calib.dig_P2)<<12);
   var1 = (((((int64_t)1)<<47)+var1))*((int64_t)_bme280_calib.dig_P1)>>33;
 
-  if (var1 == 0) {
+  if (var1 == 0)
     return 0;  // avoid exception caused by division by zero
-  }
   p = 1048576 - adc_P;
   p = (((p<<31) - var2)*3125) / var1;
   var1 = (((int64_t)_bme280_calib.dig_P9) * (p>>13) * (p>>13)) >> 25;
@@ -234,7 +230,6 @@ float BME280::pressure(void) {
 */
 /**************************************************************************/
 float BME280::humidity(void) {
-
   temperature(); // must be done first to get t_fine
 
   int32_t adc_H = read16(BME280_REGISTER_HUMIDDATA);
@@ -244,13 +239,13 @@ float BME280::humidity(void) {
   v_x1_u32r = (t_fine - ((int32_t)76800));
 
   v_x1_u32r = (((((adc_H << 14) - (((int32_t)_bme280_calib.dig_H4) << 20) -
-		  (((int32_t)_bme280_calib.dig_H5) * v_x1_u32r)) + ((int32_t)16384)) >> 15) *
-	       (((((((v_x1_u32r * ((int32_t)_bme280_calib.dig_H6)) >> 10) *
-		    (((v_x1_u32r * ((int32_t)_bme280_calib.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) +
-		  ((int32_t)2097152)) * ((int32_t)_bme280_calib.dig_H2) + 8192) >> 14));
+              (((int32_t)_bme280_calib.dig_H5) * v_x1_u32r)) + ((int32_t)16384)) >> 15) *
+              (((((((v_x1_u32r * ((int32_t)_bme280_calib.dig_H6)) >> 10) *
+              (((v_x1_u32r * ((int32_t)_bme280_calib.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) +
+              ((int32_t)2097152)) * ((int32_t)_bme280_calib.dig_H2) + 8192) >> 14));
 
   v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) *
-			     ((int32_t)_bme280_calib.dig_H1)) >> 4));
+              ((int32_t)_bme280_calib.dig_H1)) >> 4));
 
   v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
   v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
@@ -260,11 +255,11 @@ float BME280::humidity(void) {
 
 /**************************************************************************/
 /*!
-    Calculates the altitude (in meters) from the specified atmospheric
-    pressure (in hPa), and sea-level pressure (in hPa).
+  Calculates the altitude (in meters) from the specified atmospheric
+  pressure (in hPa), and sea-level pressure (in hPa).
 
-    @param  seaLevel      Sea-level pressure in hPa
-    @param  atmospheric   Atmospheric pressure in hPa
+  @param  seaLevel      Sea-level pressure in hPa
+  @param  atmospheric   Atmospheric pressure in hPa
 */
 /**************************************************************************/
 float BME280::altitude(float seaLevel)
