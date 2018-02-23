@@ -12,10 +12,7 @@ lucky	KEYWORD3
 # Methods and Functions (KEYWORD2)
 #######################################
 
-accelerometer	KEYWORD2
 environment	KEYWORD2
-oled	KEYWORD2
-magnetometer	KEYWORD2
 gpio	KEYWORD2
 
 #######################################
