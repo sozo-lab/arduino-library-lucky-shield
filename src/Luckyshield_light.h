@@ -78,6 +78,10 @@ public:
     bme280.begin();
   }
 
+  MMA8491Q& accelerometer() {
+    return mma8491q;
+  }
+
   BME280& environment() {
     return bme280;
   }
