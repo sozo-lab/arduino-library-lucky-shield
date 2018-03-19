@@ -61,6 +61,7 @@
 
 #include "lib/BME280.h"
 #include "lib/CAT9555.h"
+#include "lib/MMA8491Q.h"
 
 #include <Arduino.h>
 #include "Wire.h"
